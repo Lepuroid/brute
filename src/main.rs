@@ -12,24 +12,16 @@ fn vec_to_arr<T, const N: usize>(v: Vec<T>) -> [T; N] {
 
 
 fn main() {
-    let re = Regex::new(r"^[A-F0-9]{64}").unwrap();
+    let re: Regex = Regex::new(r"^[A-F0-9]{64}").unwrap();
     let args: Vec<String> = env::args().collect();
-    if args.len() < 2 {
-        panic!("PANIC!!!")
-    }
-    if !re.is_match(&args[1]) {
+    if args.len() < 2 || !re.is_match(&args[1]){
         panic!("PANIC!!!")
     }
     let hash = vec_to_arr::<u8, 32>(hex::decode(&args[1]).unwrap());
-
-    let mut hasher = Sha256::new();
-    hasher.update(b"hello world");
-    let res = hasher.finalize();
-
-    // arr from generic array
-
-    if hash == res{
+    let samp = Sha256::digest(b"hello world");
+    if hash == <[u8; 32]>::from(samp) {
         println!("{:?}", hash);
-        println!("{:?}", res);
+        println!("{:?}", samp);
     }
+    println!("{}", "The End!");
 }
