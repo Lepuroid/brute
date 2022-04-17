@@ -26,8 +26,8 @@ fn main() {
             }
             for _x in 0..95 {
                 let h: [u8; 32] = <[u8; 32]>::from(Sha256::digest(&s));
-                // println!("Hash: {} for pass: {}", hex::encode(h),
-                //      String::from_utf8(s.to_vec()).unwrap());
+                println!("Hash: {} for pass: {}", hex::encode(h),
+                     String::from_utf8(s.to_vec()).unwrap());
                 if hash == h {
                     flag = true;
                     break;
@@ -41,19 +41,21 @@ fn main() {
                 s.fill(32);
                 s.push(32);
                 iter_flag = true;
-            } else if let Some(p) = s.iter().rposition(|&x| x == 127_u8) {
+            } 
+            while let Some(p) = s.iter().rposition(|&x| x == 127_u8) {
                 s[p + 1] += 1;
                 if s.ends_with(&[127]) {
                     s.fill(32);
                     s.push(32);
-                }
-                for j in 0..p + 1 {
-                    s[j] = 32;
+                } else {
+                    for j in 0..p + 1 {
+                        s[j] = 32;
+                    }
                 }
                 iter_flag = true;
             }
         }
     }
     println!("Password is: \"{}\"", String::from_utf8(s).unwrap());
-    println!("Time: {} seconds", now.elapsed().as_secs());
+    println!("Time: {} milliseconds", now.elapsed().as_millis());
 }
