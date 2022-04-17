@@ -1,7 +1,10 @@
 [package]
 name = "brute"
-version = "0.1.0"
+version = "0.1.1"
+authors = ["Lepuroid <lepuroid@gmail.com>"]
 edition = "2021"
+description = "sha256 bruteforce utility. Usage of the utility is allowed for research purposes only."
+licence = "MIT license"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
