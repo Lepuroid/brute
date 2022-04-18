@@ -12,6 +12,3 @@ Cargo.lock
 
 # VSCode stuff
 /.vscode/
-
-# criterion.rs
-/benches/

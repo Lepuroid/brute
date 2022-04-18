@@ -1,18 +1,20 @@
-use std::{env, convert::TryInto, time::Instant};
+use criterion::{black_box, criterion_group, criterion_main, Criterion};
+
+// fn fibonacci(n: u64) -> u64 {
+//     match n {
+//         0 => 1,
+//         1 => 1,
+//         n => fibonacci(n-1) + fibonacci(n-2),
+//     }
+// }
+
+use std::{convert::TryInto, time::Instant};
 use hex;
-use regex::Regex;
 use sha2::{Sha256, Digest};
 
-fn main() {
+fn brute(arg: String) {
     let now: Instant = Instant::now();
-    let re: Regex = Regex::new(r"^[a-fA-F0-9]{64}").unwrap();
-    let args: Vec<String> = env::args().collect();
-    if args.len() < 2 {
-        panic!("No hash provaded!")
-    } else if !re.is_match(&args[1]) {
-        panic!("Provided argument is not hash!")
-    }
-    let hash: [u8; 32] = hex::decode(&args[1]).unwrap().as_slice()
+    let hash: [u8; 32] = hex::decode(&arg).unwrap().as_slice()
         .try_into().unwrap();
     let mut s: Vec<u8> = vec![32];
     let mut flag: bool = false;
@@ -60,3 +62,10 @@ fn main() {
     println!("Password is: \"{}\"", String::from_utf8(s).unwrap());
     println!("Time: {} milliseconds", now.elapsed().as_millis());
 }
+
+fn criterion_benchmark(c: &mut Criterion) {
+    c.bench_function("brute", |b| b.iter(|| brute(black_box(String::from("eb87821f650a847d70a85d4221ca46050b9bd2e421a185100dcfc43d9f93a3bb")))));
+}
+
+criterion_group!(benches, criterion_benchmark);
+criterion_main!(benches);
