@@ -12,3 +12,10 @@ licence = "MIT license"
 regex = "1"
 sha2 = "0.10.2"
 hex = "0.4.3"
+
+[dev-dependencies]
+criterion = "0.3.4"
+
+[[bench]]
+name = "my_benchmark"
+harness = false
