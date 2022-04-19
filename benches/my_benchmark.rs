@@ -26,7 +26,7 @@ fn brute(arg: String) {
                 i = 0;
                 iter_flag = false;
             }
-            for _x in 0..95 {
+            for _x in 0..95 as u8{
                 let h: [u8; 32] = <[u8; 32]>::from(Sha256::digest(&s));
                 // println!("Hash: {} for pass: {}", hex::encode(h),
                 //     String::from_utf8(s.to_vec()).unwrap());
