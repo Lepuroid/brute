@@ -8,12 +8,13 @@ use criterion::{black_box, criterion_group, criterion_main, Criterion};
 //     }
 // }
 
-use std::{convert::TryInto, time::Instant};
+//use std::{convert::TryInto, time::Instant};
+use std::convert::TryInto;
 use hex;
 use sha2::{Sha256, Digest};
 
 fn brute(arg: String) {
-    let now: Instant = Instant::now();
+//    let now: Instant = Instant::now();
     let hash: [u8; 32] = hex::decode(&arg).unwrap().as_slice()
         .try_into().unwrap();
     let mut s: Vec<u8> = vec![32];
@@ -29,7 +30,7 @@ fn brute(arg: String) {
             for _x in 0..95 as u8{
                 let h: [u8; 32] = <[u8; 32]>::from(Sha256::digest(&s));
                 // println!("Hash: {} for pass: {}", hex::encode(h),
-                //     String::from_utf8(s.to_vec()).unwrap());
+                //         String::from_utf8(s.to_vec()).unwrap());
                 if hash == h {
                     flag = true;
                     break;
@@ -59,8 +60,8 @@ fn brute(arg: String) {
             }
         }
     }
-    println!("Password is: \"{}\"", String::from_utf8(s).unwrap());
-    println!("Time: {} milliseconds", now.elapsed().as_millis());
+    // println!("Password is: \"{}\"", String::from_utf8(s).unwrap());
+    // println!("Time: {} milliseconds", now.elapsed().as_millis());
 }
 
 fn criterion_benchmark(c: &mut Criterion) {
@@ -69,3 +70,7 @@ fn criterion_benchmark(c: &mut Criterion) {
 
 criterion_group!(benches, criterion_benchmark);
 criterion_main!(benches);
+
+//Intel(R) Core(TM) i3-4160 CPU @ 3.60GHz 
+//time:   [308.55 ms 309.01 ms 309.55 ms]
+   
