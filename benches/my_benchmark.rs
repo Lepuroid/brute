@@ -76,3 +76,5 @@ criterion_main!(benches);
 
 //(VM linux) AMD Ryzen 7 PRO 4750U
 //time:   [265.57 ms 265.95 ms 266.37 ms]
+//(Windows) AMD Ryzen 7 PRO 4750U
+//time:   [47.270 ms 47.296 ms 47.320 ms]
