@@ -73,4 +73,6 @@ criterion_main!(benches);
 
 //Intel(R) Core(TM) i3-4160 CPU @ 3.60GHz 
 //time:   [308.55 ms 309.01 ms 309.55 ms]
-   
+
+//(VM linux) AMD Ryzen 7 PRO 4750U
+//time:   [265.57 ms 265.95 ms 266.37 ms]
